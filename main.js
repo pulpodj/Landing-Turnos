@@ -9,7 +9,8 @@ document.addEventListener("DOMContentLoaded", () => {
   // ===== Scroll suave a contacto =====
   if (btnIngresar && contactSection) {
     btnIngresar.addEventListener("click", () => {
-      contactSection.scrollIntoView({ behavior: "smooth" });
+      //redireccionar a web de turnos
+      window.location.href = "https://front-gestor-turnos.onrender.com";
     });
   }
 
