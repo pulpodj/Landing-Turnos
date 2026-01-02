@@ -1,36 +1,48 @@
-// main.js
+// main.js (SIN TOKEN)
 
 document.addEventListener("DOMContentLoaded", () => {
+  // ===== Config API (sin token) =====
+  const API_BASE = "https://backend-turnos-7n89.onrender.com";
+
   const btnIngresar = document.getElementById("btnIngresar");
-  const contactSection = document.getElementById("contact");
   const contactForm = document.getElementById("contactForm");
   const formMessage = document.getElementById("formMessage");
 
-  // ===== Scroll suave a contacto =====
-  if (btnIngresar && contactSection) {
+  // Inputs (tu HTML usa id="")
+  const inputNombre = document.getElementById("nombre");
+  const inputApellido = document.getElementById("apellido");
+  const inputEmail = document.getElementById("email");
+  const inputTelefono = document.getElementById("telefono");
+  const inputWebsite = document.getElementById("website"); // honeypot opcional
+
+  // ===== Botón Ingresar -> redirección =====
+  if (btnIngresar) {
     btnIngresar.addEventListener("click", () => {
-      //redireccionar a web de turnos
       window.location.href = "https://front-gestor-turnos.onrender.com";
     });
   }
 
   // ===== Reveal on scroll (finura ✨) =====
   const revealEls = document.querySelectorAll(".reveal");
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("reveal--visible");
-          observer.unobserve(entry.target);
-        }
-      });
-    },
-    { threshold: 0.18 }
-  );
+  if (revealEls.length > 0 && "IntersectionObserver" in window) {
+    const observer = new IntersectionObserver(
+      (entries, obs) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("reveal--visible");
+            obs.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.18 }
+    );
 
-  revealEls.forEach((el) => observer.observe(el));
+    revealEls.forEach((el) => observer.observe(el));
+  } else {
+    revealEls.forEach((el) => el.classList.add("reveal--visible"));
+  }
 
-  // ===== Datos de servicios =====
+  // ===== Servicios dinámicos =====
   const serviceCards = document.querySelectorAll(".service-card");
   const detailImage = document.getElementById("serviceDetailImage");
   const detailTitle = document.getElementById("serviceDetailTitle");
@@ -49,8 +61,8 @@ document.addEventListener("DOMContentLoaded", () => {
         "Movilizaciones articulares.",
         "Masaje y tratamiento de tejidos blandos.",
         "Técnicas de energía muscular.",
-        "Ejercicio terapéutico complementario."
-      ]
+        "Ejercicio terapéutico complementario.",
+      ],
     },
     kinesiologiaConvencional: {
       title: "KINESIOLOGÍA CONVENCIONAL",
@@ -63,8 +75,8 @@ document.addEventListener("DOMContentLoaded", () => {
         "Reeducación de la marcha y la postura.",
         "Fortalecimiento y movilidad articular.",
         "Uso de agentes físicos según indicación profesional.",
-        "Seguimiento y ajustes según evolución."
-      ]
+        "Seguimiento y ajustes según evolución.",
+      ],
     },
     ejerciciosAdaptados: {
       title: "EJERCICIOS ADAPTADOS",
@@ -77,9 +89,9 @@ document.addEventListener("DOMContentLoaded", () => {
         "Rutinas progresivas según objetivo y condición.",
         "Ejercicios de estabilidad, fuerza y control motor.",
         "Prevención de recaídas y sobrecargas.",
-        "Educación en hábitos de movimiento y autocuidado."
-      ]
-    }
+        "Educación en hábitos de movimiento y autocuidado.",
+      ],
+    },
   };
 
   function updateServiceDetail(key) {
@@ -91,11 +103,7 @@ document.addEventListener("DOMContentLoaded", () => {
     detailImage.src = data.image;
     detailImage.alt = data.imageAlt;
 
-    // Limpiamos la lista de forma segura
-    while (detailList.firstChild) {
-      detailList.removeChild(detailList.firstChild);
-    }
-
+    detailList.textContent = "";
     data.bullets.forEach((item) => {
       const li = document.createElement("li");
       li.textContent = item;
@@ -117,30 +125,63 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // Estado inicial
   updateServiceDetail("terapiaManual");
 
-  // ===== Validación de formulario (simple, sin innerHTML) =====
-
+  // ===== Helpers form =====
   function sanitizeInput(value) {
-    // evita que entren tags raros / JS obvio
-    return value.replace(/[<>]/g, "").trim();
+    return String(value || "").replace(/[<>]/g, "").trim();
   }
 
   function isValidEmail(email) {
-    // regex simple y razonable, sin locuras
     const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return pattern.test(email);
   }
 
-  if (contactForm && formMessage) {
-    contactForm.addEventListener("submit", (e) => {
+  async function postJSONWithTimeout(url, payload, timeoutMs = 12000) {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), timeoutMs);
+
+    try {
+      const res = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+        },
+        body: JSON.stringify(payload),
+        signal: controller.signal,
+      });
+
+      const contentType = res.headers.get("content-type") || "";
+      const isJson = contentType.includes("application/json");
+      const data = isJson
+        ? await res.json().catch(() => null)
+        : await res.text().catch(() => null);
+
+      return { ok: res.ok, status: res.status, data };
+    } finally {
+      clearTimeout(timer);
+    }
+  }
+
+  // ===== Submit formulario =====
+  if (contactForm && formMessage && inputNombre && inputApellido && inputEmail) {
+    contactForm.addEventListener("submit", async (e) => {
       e.preventDefault();
 
-      const nombre = sanitizeInput(contactForm.nombre.value);
-      const apellido = sanitizeInput(contactForm.apellido.value);
-      const email = sanitizeInput(contactForm.email.value);
-      const telefono = sanitizeInput(contactForm.telefono.value || "");
+      const nombre = sanitizeInput(inputNombre.value);
+      const apellido = sanitizeInput(inputApellido.value);
+      const email = sanitizeInput(inputEmail.value);
+      const telefono = sanitizeInput(inputTelefono?.value || "");
+      const website = sanitizeInput(inputWebsite?.value || ""); // honeypot opcional
+
+      // honeypot: si viene lleno, fingimos éxito (anti-bots)
+      if (website) {
+        formMessage.textContent = "¡Gracias! Nos pondremos en contacto a la brevedad.";
+        formMessage.style.color = "#047857";
+        contactForm.reset();
+        return;
+      }
 
       if (!nombre || !apellido || !email) {
         formMessage.textContent = "Por favor completá los campos obligatorios.";
@@ -154,17 +195,53 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
 
-      if (telefono && telefono.length < 6) {
+      if (telefono && telefono.replace(/\D/g, "").length < 6) {
         formMessage.textContent = "Revisá el número de teléfono ingresado.";
         formMessage.style.color = "#b91c1c";
         return;
       }
 
-      // Acá iría el fetch al backend / API real
-      formMessage.textContent = "¡Gracias! Nos pondremos en contacto a la brevedad.";
-      formMessage.style.color = "#047857";
+      formMessage.textContent = "Enviando…";
+      formMessage.style.color = "#374151";
 
-      contactForm.reset();
+      const url = `${API_BASE}/API/contacto`;
+
+
+      try {
+        const result = await postJSONWithTimeout(url, { nombre, apellido, email, telefono });
+
+        console.log("Respuesta API:", result);
+
+        if (result.ok) {
+          formMessage.textContent = "¡Gracias! Nos pondremos en contacto a la brevedad.";
+          formMessage.style.color = "#047857";
+          contactForm.reset();
+          return;
+        }
+
+        // Mensajes útiles por status
+        if (result.status === 401 || result.status === 403) {
+          formMessage.textContent = "No autorizado. El endpoint requiere token.";
+        } else if (result.status === 429) {
+          formMessage.textContent = "Demasiadas solicitudes. Probá de nuevo en un ratito.";
+        } else {
+          const serverMsg =
+            (typeof result.data === "object" && result.data && (result.data.message || result.data.mensaje)) || null;
+
+          formMessage.textContent = serverMsg || "Error al enviar el formulario. Intentalo más tarde.";
+        }
+        formMessage.style.color = "#b91c1c";
+      } catch (err) {
+        console.error("Error:", err);
+
+        formMessage.textContent =
+          String(err?.name) === "AbortError"
+            ? "La solicitud tardó demasiado. Probá de nuevo."
+            : "Error al enviar el formulario. Intentalo más tarde.";
+        formMessage.style.color = "#b91c1c";
+      }
     });
+  } else {
+    console.warn("Formulario: faltan elementos (contactForm/formMessage/inputs). Revisá ids en el HTML.");
   }
 });

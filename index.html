@@ -1,183 +1,227 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <link rel="icon" type="image/x-icon" href="assets/favicon.png">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Neffen Consultorios - Kinesiología y Osteopatía</title>
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/x-icon" href="assets/favicon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Neffen Consultorios - Kinesiología y Osteopatía</title>
 
-  <link rel="stylesheet" href="styles.css" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-</head>
-<body>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- ===== HEADER ===== -->
+    <header class="header">
+      <div class="container header__content">
+        <div class="header__logo">
+          <img
+            src="assets/Logo.png"
+            alt="Neffen Consultorios"
+            class="logo-img"
+          />
+        </div>
 
-  <!-- ===== HEADER ===== -->
-  <header class="header">
-    <div class="container header__content">
-      <div class="header__logo">
-        <img src="assets/Logo.png" alt="Neffen Consultorios" class="logo-img">
+        <nav class="header__nav">
+          <a href="#services" class="nav-link">Servicios</a>
+          <a href="#therapy" class="nav-link">Tratamientos</a>
+          <a href="#contact" class="nav-link">Contacto</a>
+        </nav>
+
+        <button class="btn btn--primary" id="btnIngresar">Ingresar</button>
       </div>
+    </header>
 
-      <nav class="header__nav">
-        <a href="#services" class="nav-link">Servicios</a>
-        <a href="#therapy" class="nav-link">Tratamientos</a>
-        <a href="#contact" class="nav-link">Contacto</a>
-      </nav>
-
-      <button class="btn btn--primary" id="btnIngresar">Ingresar</button>
-    </div>
-  </header>
-
-  <!-- ===== HERO ===== -->
-<section class="hero">
-  <div class="hero__content">
-    <p class="hero__tagline">CLÍNICA DE REHABILITACIÓN</p>
-    <h1 class="hero__title">Kinesiología y Osteopatía</h1>
-    <p class="hero__description">
-      En Neffen Consultorios ofrecemos tratamientos personalizados orientados a la recuperación funcional,
-      el alivio del dolor y la mejora de la movilidad.
-    </p>
-  </div>
-</section>
-
-  <!-- ===== SERVICIOS ===== -->
-  <section class="section reveal" id="services">
-    <div class="container section__header">
-      <p class="section__tagline">ÁREAS</p>
-      <h2 class="section__title">Nuestros servicios</h2>
-      <p class="section__subtitle">
-        Brindamos un enfoque integral combinando técnicas manuales, kinesiología convencional y programas de ejercicio adaptado.
-      </p>
-    </div>
-
-    <div class="container services-wrapper">
-      <div class="services__icons-card">
-
-        <article class="service-card service-card--active" data-service="terapiaManual">
-          <div class="service-card__icon">
-            <img src="assets/Icono1.png" alt="Terapia Manual">
-          </div>
-          <h3 class="service-card__title">Terapia Manual</h3>
-        </article>
-
-        <article class="service-card" data-service="kinesiologiaConvencional">
-          <div class="service-card__icon">
-            <img src="assets/Icono2.png" alt="Kinesiología Convencional">
-          </div>
-          <h3 class="service-card__title">Kinesiología Convencional</h3>
-        </article>
-
-        <article class="service-card" data-service="ejerciciosAdaptados">
-          <div class="service-card__icon">
-            <img src="assets/Icono3.png" alt="Ejercicios Adaptados">
-          </div>
-          <h3 class="service-card__title">Ejercicios Adaptados</h3>
-        </article>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== DETALLE SERVICIO ===== -->
-  <section class="section section--light reveal" id="therapy">
-    <div class="container therapy-card">
-
-      <div class="therapy__image">
-        <img id="serviceDetailImage" src="assets/TerapiaManual.png" alt="">
-      </div>
-
-      <div class="therapy__content">
-        <h2 class="therapy__title" id="serviceDetailTitle">TERAPIA MANUAL</h2>
-        <p class="therapy__intro" id="serviceDetailIntro">
-          Técnicas manuales específicas para disminuir el dolor, restaurar la movilidad
-          y mejorar el funcionamiento general del cuerpo.
+    <!-- ===== HERO ===== -->
+    <section class="hero">
+      <div class="hero__content">
+        <p class="hero__tagline">CLÍNICA DE REHABILITACIÓN</p>
+        <h1 class="hero__title">Kinesiología y Osteopatía</h1>
+        <p class="hero__description">
+          En Neffen Consultorios ofrecemos tratamientos personalizados
+          orientados a la recuperación funcional, el alivio del dolor y la
+          mejora de la movilidad.
         </p>
-
-        <ul class="therapy__list" id="serviceDetailList">
-          <li>Evaluación funcional: postura, movilidad, fuerza y test específicos.</li>
-          <li>Movilizaciones articulares.</li>
-          <li>Masaje y tratamiento de tejidos blandos.</li>
-          <li>Técnicas de energía muscular.</li>
-          <li>Ejercicio terapéutico complementario.</li>
-        </ul>
       </div>
+    </section>
 
-    </div>
-  </section>
-
-  <!-- ===== FORMULARIO ===== -->
-  <section class="section section--pad reveal" id="contact">
-    <div class="container contact__grid">
-
-      <div class="contact__info">
-        <p>
-          Completá el formulario y nuestro equipo te contactará para coordinar un turno
-          o despejar cualquier consulta.
+    <!-- ===== SERVICIOS ===== -->
+    <section class="section reveal" id="services">
+      <div class="container section__header">
+        <p class="section__tagline">ÁREAS</p>
+        <h2 class="section__title">Nuestros servicios</h2>
+        <p class="section__subtitle">
+          Brindamos un enfoque integral combinando técnicas manuales,
+          kinesiología convencional y programas de ejercicio adaptado.
         </p>
       </div>
 
-      <div class="contact-card">
+      <div class="container services-wrapper">
+        <div class="services__icons-card">
+          <article
+            class="service-card service-card--active"
+            data-service="terapiaManual"
+          >
+            <div class="service-card__icon">
+              <img src="assets/Icono1.png" alt="Terapia Manual" />
+            </div>
+            <h3 class="service-card__title">Terapia Manual</h3>
+          </article>
 
-        <div class="contact-img-container">
-          <img src="assets/Formulario.png" alt="Hoja formulario" class="contact-img">
+          <article class="service-card" data-service="kinesiologiaConvencional">
+            <div class="service-card__icon">
+              <img src="assets/Icono2.png" alt="Kinesiología Convencional" />
+            </div>
+            <h3 class="service-card__title">Kinesiología Convencional</h3>
+          </article>
+
+          <article class="service-card" data-service="ejerciciosAdaptados">
+            <div class="service-card__icon">
+              <img src="assets/Icono3.png" alt="Ejercicios Adaptados" />
+            </div>
+            <h3 class="service-card__title">Ejercicios Adaptados</h3>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== DETALLE SERVICIO ===== -->
+    <section class="section section--light reveal" id="therapy">
+      <div class="container therapy-card">
+        <div class="therapy__image">
+          <img id="serviceDetailImage" src="assets/TerapiaManual.png" alt="" />
         </div>
 
-        <div class="contact-card__header">
-          <h3>Contacto</h3>
-          <p>Ingresá tus datos y te escribimos a la brevedad.</p>
+        <div class="therapy__content">
+          <h2 class="therapy__title" id="serviceDetailTitle">TERAPIA MANUAL</h2>
+          <p class="therapy__intro" id="serviceDetailIntro">
+            Técnicas manuales específicas para disminuir el dolor, restaurar la
+            movilidad y mejorar el funcionamiento general del cuerpo.
+          </p>
+
+          <ul class="therapy__list" id="serviceDetailList">
+            <li>
+              Evaluación funcional: postura, movilidad, fuerza y test
+              específicos.
+            </li>
+            <li>Movilizaciones articulares.</li>
+            <li>Masaje y tratamiento de tejidos blandos.</li>
+            <li>Técnicas de energía muscular.</li>
+            <li>Ejercicio terapéutico complementario.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== FORMULARIO ===== -->
+    <section class="section section--pad reveal" id="contact">
+      <div class="container contact__grid">
+        <div class="contact__info">
+          <p>
+            Completá el formulario y nuestro equipo te contactará para coordinar
+            un turno o despejar cualquier consulta.
+          </p>
         </div>
 
-        <form class="contact-form" id="contactForm" novalidate>
-          <div class="form-group">
-            <label for="nombre">Nombre</label>
-            <input id="nombre" maxlength="40" required autocomplete="off">
+        <div class="contact-card">
+          <div class="contact-img-container">
+            <img
+              src="assets/Formulario.png"
+              alt="Hoja formulario"
+              class="contact-img"
+            />
           </div>
 
-          <div class="form-group">
-            <label for="apellido">Apellido</label>
-            <input id="apellido" maxlength="40" required autocomplete="off">
+          <div class="contact-card__header">
+            <h3>Contacto</h3>
+            <p>Ingresá tus datos y te escribimos a la brevedad.</p>
           </div>
 
-          <div class="form-group">
-            <label for="email">Email</label>
-            <input id="email" type="email" maxlength="60" required autocomplete="off">
-          </div>
+          <form class="contact-form" id="contactForm" novalidate>
+            <div class="form-group">
+              <label for="nombre">Nombre</label>
+              <input id="nombre" maxlength="40" required autocomplete="off" />
+            </div>
 
-          <div class="form-group">
-            <label for="telefono">Teléfono</label>
-            <input id="telefono" maxlength="20" autocomplete="off">
-          </div>
+            <div class="form-group">
+              <label for="apellido">Apellido</label>
+              <input id="apellido" maxlength="40" required autocomplete="off" />
+            </div>
 
-          <button type="submit" class="btn btn--full">Enviar</button>
-          <p class="form-message" id="formMessage"></p>
-        </form>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input
+                id="email"
+                type="email"
+                maxlength="60"
+                required
+                autocomplete="off"
+              />
+            </div>
 
+            <div class="form-group">
+              <label for="telefono">Teléfono</label>
+              <input id="telefono" maxlength="20" autocomplete="off" />
+            </div>
+
+            <button type="submit" class="btn btn--full">Enviar</button>
+            <p class="form-message" id="formMessage"></p>
+
+            <!-- Honeypot anti-bots (NO TOCAR) -->
+            <div
+              aria-hidden="true"
+              style="
+                position: absolute;
+                left: -9999px;
+                top: auto;
+                width: 1px;
+                height: 1px;
+                overflow: hidden;
+              "
+            >
+              <label for="website">Website</label>
+              <input
+                id="website"
+                name="website"
+                tabindex="-1"
+                autocomplete="new-password"
+              />
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+      <div class="container footer__grid">
+        <div class="footer__info">
+          <p><strong>Teléfono:</strong> 3404-649181</p>
+          <p><strong>Email:</strong> neffenpioli@gmail.com</p>
+          <p>
+            <strong>Dirección:</strong> Av. San Martín 1561 - Pilar, Santa Fe,
+            Argentina.
+          </p>
+        </div>
+
+        <div class="footer__logo">
+          <img
+            src="assets/Logo.png"
+            class="footer-logo"
+            alt="Neffen Consultorios"
+          />
+        </div>
       </div>
 
-    </div>
-  </section>
-
-  <!-- ===== FOOTER ===== -->
-  <footer class="footer">
-    <div class="container footer__grid">
-      <div class="footer__info">
-        <p><strong>Teléfono:</strong> 3404-649181</p>
-        <p><strong>Email:</strong> neffenpiol@gmail.com</p>
-        <p><strong>Dirección:</strong> Av. San Martín 1561 - Pilar, Santa Fe</p>
+      <div class="footer__bottom">
+        <p>© 2026 Neffen Consultorios. Todos los derechos reservados.</p>
       </div>
+    </footer>
 
-      <div class="footer__logo">
-        <img src="assets/Logo.png" class="footer-logo" alt="Neffen Consultorios">
-      </div>
-    </div>
-
-    <div class="footer__bottom">
-      <p>© 2026 Neffen Consultorios. Todos los derechos reservados.</p>
-    </div>
-  </footer>
-
-  <script src="main.js"></script>
-</body>
+    <script src="main.js"></script>
+  </body>
 </html>
